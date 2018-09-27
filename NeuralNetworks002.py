@@ -1,7 +1,7 @@
 import math
 import random
-import NeuralNetworks
 import pickle
+import os
 
 class NeuralLayer:
     def __init__(self, numberOfInputs, numberOfOutputs, activationFunction, weights = None):
@@ -105,16 +105,16 @@ def LoadNeuralNetwork(path):
     with open(path, 'rb') as f:
         return pickle.load(f)
 
+scriptDirectory = os.path.dirname(os.path.realpath(__file__))
+print(scriptDirectory)
 name = input('Enter saved neural network path or enter None:')
 if name == 'None':
     nn = NeuralNetwork([784,112,10],aFunc)
 else:
-    path = 'C:\\Users\\Stav Korai\\Desktop\\'
-    path += name
-    nn = LoadNeuralNetwork(path)
+    nn = LoadNeuralNetwork(scriptDirectory + '\\' +  name)
 teacher = NeuralTeacherTanh(nn,0.01)
-labelFile = open(r'C:\Users\Stav Korai\Desktop\lables.idx1-ubyte','rb')
-imageFile = open(r'C:\Users\Stav Korai\Desktop\images.idx3-ubyte','rb')
+labelFile = open(scriptDirectory + '\\' + 'lables.idx1-ubyte','rb')
+imageFile = open(scriptDirectory + '\\' +  'images.idx3-ubyte','rb')
 trainingData = []
 try:
     for i in range(15000):
@@ -138,14 +138,14 @@ finally:
 print('Done loading')
 print('Now training...')
 setNumber = 0
-for i in range(0):
+for i in range(1):
     r = random.randint(0,len(trainingData)-1)
     set = trainingData[r]
     nn = teacher.Teach(set[1],set[2])
     setNumber += 1
     if setNumber%100 == 0:
         print(setNumber)
-SaveNeuralNetwork(nn,r'C:\Users\Stav Korai\Desktop\Digits')
+SaveNeuralNetwork(nn,scriptDirectory + '\\' +  'Digits')
 print('Done training, you can now test')
 check = True
 while check:
