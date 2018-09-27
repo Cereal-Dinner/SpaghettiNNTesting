@@ -148,6 +148,7 @@ for i in range(1):
 SaveNeuralNetwork(nn,scriptDirectory + '\\' +  'Digits')
 print('Done training, you can now test')
 check = True
+
 while check:
     r = random.randint(0,len(trainingData)-1)
     print(trainingData[r][0])
