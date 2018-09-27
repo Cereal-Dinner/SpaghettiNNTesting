@@ -117,7 +117,7 @@ labelFile = open(scriptDirectory + '\\' + 'lables.idx1-ubyte','rb')
 imageFile = open(scriptDirectory + '\\' +  'images.idx3-ubyte','rb')
 trainingData = []
 try:
-    for i in range(15000):
+    for i in range(1000):
         inputs = []
         requiredOutputs = []
         lable = int.from_bytes(labelFile.read(1),byteorder='big')
@@ -138,7 +138,7 @@ finally:
 print('Done loading')
 print('Now training...')
 setNumber = 0
-for i in range(5000):
+for i in range(0):
     r = random.randint(0,len(trainingData)-1)
     set = trainingData[r]
     nn = teacher.Teach(set[1],set[2])
@@ -147,9 +147,8 @@ for i in range(5000):
         print(setNumber)
 SaveNeuralNetwork(nn,scriptDirectory + '\\' +  'Digits')
 print('Done training, you can now test')
-check = True
 
-while check:
+while True:
     r = random.randint(0,len(trainingData)-1)
     print(trainingData[r][0])
     print(trainingData[r][2])
@@ -174,5 +173,4 @@ while check:
         print('Correct')
     else:
         print('Incorrect')
-    if input() == 'e':
-        check = False
+    input()
