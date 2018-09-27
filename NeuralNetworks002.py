@@ -138,7 +138,7 @@ finally:
 print('Done loading')
 print('Now training...')
 setNumber = 0
-for i in range(1):
+for i in range(5000):
     r = random.randint(0,len(trainingData)-1)
     set = trainingData[r]
     nn = teacher.Teach(set[1],set[2])
